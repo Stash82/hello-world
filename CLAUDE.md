@@ -17,10 +17,21 @@ exploring multiple programming languages, with a primary focus on Java.
 hello-world/
 ├── .github/
 │   └── workflows/
-│       └── blank.yml    # GitHub Actions CI workflow (runs on every push)
-├── README.md            # Project description
-└── CLAUDE.md            # This file
+│       └── blank.yml        # GitHub Actions CI workflow (runs on every push)
+├── fizzbuzz/
+│   ├── FizzBuzz.java        # FizzBuzz in Java
+│   ├── fizzbuzz.py          # FizzBuzz in Python
+│   ├── fizzbuzz.go          # FizzBuzz in Go
+│   └── fizzbuzz.js          # FizzBuzz in JavaScript
+├── README.md                # Project description
+└── CLAUDE.md                # This file
 ```
+
+### Multi-language comparisons
+
+The `fizzbuzz/` folder contains the same problem solved in four languages side-by-side.
+This is intentional — comparing implementations is a great way to learn language differences.
+Future comparison problems should follow the same pattern: one folder per problem, one file per language.
 
 ## CI / GitHub Actions
 
