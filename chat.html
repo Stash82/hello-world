@@ -126,12 +126,12 @@
   <script>
     // ── Config ────────────────────────────────────────────────────
     const WEBHOOK_URL = 'YOUR_N8N_WEBHOOK_URL';
-    const JWT_TOKEN   = 'YOUR_JWT_TOKEN';
     // ─────────────────────────────────────────────────────────────
 
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('input');
     const sendBtn    = document.getElementById('send');
+    let lastSent     = 0;
 
     // Persistent across visits; new session per tab
     function getIds() {
@@ -176,6 +176,8 @@
     async function sendMessage() {
       const text = inputEl.value.trim();
       if (!text) return;
+      if (Date.now() - lastSent < 1500) return; // 1.5s minimum between messages
+      lastSent = Date.now();
 
       addMessage(text, 'user');
       inputEl.value = '';
@@ -185,10 +187,7 @@
       try {
         const res = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type':  'application/json',
-            'Authorization': `Bearer ${JWT_TOKEN}`
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             message:    text,
             visitor_id: ids.visitor_id,
