@@ -126,6 +126,7 @@
   <script>
     // ── Config ────────────────────────────────────────────────────
     const WEBHOOK_URL = 'YOUR_N8N_WEBHOOK_URL';
+    const JWT_TOKEN   = 'YOUR_JWT_TOKEN';
     // ─────────────────────────────────────────────────────────────
 
     const messagesEl = document.getElementById('messages');
@@ -184,7 +185,10 @@
       try {
         const res = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': `Bearer ${JWT_TOKEN}`
+          },
           body: JSON.stringify({
             message:    text,
             visitor_id: ids.visitor_id,
